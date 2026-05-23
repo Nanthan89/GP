@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Goutha Pushpananthan — Academic Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #1a2540;
+    --slate: #4a5568;
+    --muted: #718096;
+    --line: #e2e8f0;
+    --bg: #fafaf8;
+    --white: #ffffff;
+    --accent: #2d6a4f;
+    --accent-light: #e8f5ee;
+    --serif: 'Lora', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--navy); font-size: 16px; line-height: 1.7; }
+
+  nav { position: sticky; top: 0; background: rgba(250,250,248,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); z-index: 100; padding: 0 2rem; }
+  .nav-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; }
+  .nav-name { font-family: var(--serif); font-size: 1rem; color: var(--navy); text-decoration: none; letter-spacing: 0.01em; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 0.875rem; color: var(--muted); text-decoration: none; letter-spacing: 0.02em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--navy); }
+
+  section { max-width: 900px; margin: 0 auto; padding: 5rem 2rem; }
+  section + section { border-top: 1px solid var(--line); }
+
+  #about { display: grid; grid-template-columns: 1fr auto; gap: 4rem; align-items: center; padding-top: 6rem; }
+  .hero-text h1 { font-family: var(--serif); font-size: 2.75rem; font-weight: 600; line-height: 1.2; color: var(--navy); margin-bottom: 0.5rem; }
+  .hero-text .role { font-size: 1rem; color: var(--accent); font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 1.5rem; }
+  .hero-text p { color: var(--slate); font-size: 1.05rem; max-width: 520px; margin-bottom: 2rem; }
+  .btn-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn { display: inline-block; padding: 0.6rem 1.4rem; border-radius: 4px; font-size: 0.875rem; font-weight: 500; text-decoration: none; transition: all 0.2s; cursor: pointer; }
+  .btn-primary { background: var(--navy); color: #fff; border: 1px solid var(--navy); }
+  .btn-primary:hover { background: #2d3a5a; }
+  .btn-outline { background: transparent; color: var(--navy); border: 1px solid var(--navy); }
+  .btn-outline:hover { background: var(--navy); color: #fff; }
+  .avatar { width: 160px; height: 160px; border-radius: 50%; background: linear-gradient(135deg, #d4e8de, #b8d4c8); display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 2.5rem; color: var(--accent); font-weight: 600; flex-shrink: 0; border: 3px solid var(--white); box-shadow: 0 0 0 1px var(--line); }
+
+  .section-label { font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.5rem; }
+  .section-title { font-family: var(--serif); font-size: 1.75rem; color: var(--navy); margin-bottom: 2.5rem; }
+
+  .timeline { display: flex; flex-direction: column; gap: 2rem; }
+  .timeline-item { display: grid; grid-template-columns: 140px 1fr; gap: 2rem; }
+  .timeline-year { font-size: 0.8rem; color: var(--muted); padding-top: 0.25rem; line-height: 1.5; }
+  .timeline-content h3 { font-family: var(--serif); font-size: 1.1rem; color: var(--navy); margin-bottom: 0.25rem; }
+  .timeline-content .org { font-size: 0.875rem; color: var(--accent); font-weight: 500; margin-bottom: 0.5rem; }
+  .timeline-content p { font-size: 0.9rem; color: var(--slate); }
+  .timeline-content ul { font-size: 0.9rem; color: var(--slate); padding-left: 1.2rem; margin-top: 0.25rem; }
+  .timeline-content ul li { margin-bottom: 0.25rem; }
+
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+  .project-card { background: var(--white); border: 1px solid var(--line); border-radius: 8px; padding: 1.5rem; transition: box-shadow 0.2s; }
+  .project-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.07); }
+  .project-tag { display: inline-block; background: var(--accent-light); color: var(--accent); font-size: 0.7rem; font-weight: 500; padding: 0.2rem 0.6rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.75rem; }
+  .project-card h3 { font-family: var(--serif); font-size: 1rem; color: var(--navy); margin-bottom: 0.5rem; }
+  .project-card p { font-size: 0.875rem; color: var(--slate); margin-bottom: 1rem; }
+  .project-link { font-size: 0.8rem; color: var(--accent); font-weight: 500; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+  .project-link:hover { border-color: var(--accent); }
+
+  .skills-grid { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2rem; }
+  .skill-tag { background: var(--white); border: 1px solid var(--line); border-radius: 4px; padding: 0.3rem 0.8rem; font-size: 0.85rem; color: var(--slate); }
+
+  #contact { text-align: center; }
+  #contact .section-title { margin-bottom: 1rem; }
+  #contact p { color: var(--slate); max-width: 420px; margin: 0 auto 2.5rem; }
+  .contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+  .contact-link { display: flex; align-items: center; gap: 0.5rem; color: var(--navy); text-decoration: none; font-size: 0.9rem; font-weight: 500; border-bottom: 1px solid var(--line); padding-bottom: 2px; transition: border-color 0.2s; }
+  .contact-link:hover { border-color: var(--navy); }
+  .contact-icon { width: 18px; height: 18px; }
+
+  footer { text-align: center; padding: 2rem; font-size: 0.8rem; color: var(--muted); border-top: 1px solid var(--line); }
+
+  @media (max-width: 640px) {
+    #about { grid-template-columns: 1fr; gap: 2rem; }
+    .avatar { width: 100px; height: 100px; font-size: 1.75rem; }
+    .hero-text h1 { font-size: 2rem; }
+    .timeline-item { grid-template-columns: 1fr; gap: 0.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-name" href="#about">Goutha Pushpananthan</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Research</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section id="about">
+  <div class="hero-text">
+    <div class="role">Assistant Professor · Innovation Researcher</div>
+    <h1>Goutha<br>Pushpananthan</h1>
+    <p>Innovation researcher with a PhD in Industrial Economics and a background in electrical engineering. My work focuses on building innovation ecosystems — most notably an award-winning doctoral thesis on the Innovation Ecosystem for Autonomous Vehicles.</p>
+    <div class="btn-row">
+      <a href="#contact" class="btn btn-primary">Get in touch</a>
+      <a href="#projects" class="btn btn-outline">View Research</a>
+    </div>
+  </div>
+  <div class="avatar">GP</div>
+</section>
+
+<section id="experience">
+  <div class="section-label">Work Experience</div>
+  <div class="section-title">Career Timeline</div>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-year">2025 — Present</div>
+      <div class="timeline-content">
+        <h3>Assistant Professor</h3>
+        <div class="org">Linköping University, Sweden</div>
+        <p>Management of complex intelligent systems and application of artificial intelligence (AI) in product development.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-year">Feb 2023 — Feb 2025</div>
+      <div class="timeline-content">
+        <h3>Postdoctoral Researcher</h3>
+        <div class="org">Linköping University, Sweden</div>
+        <p>Continued research on innovation ecosystems and technology management following doctoral work at Chalmers.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-year">Jul 2022 — Jan 2023</div>
+      <div class="timeline-content">
+        <h3>Postdoctoral Researcher</h3>
+        <div class="org">University of Gothenburg, School of Business, Economics and Law</div>
+        <p>Research in innovation management and business economics, building on ecosystem research from PhD.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-year">2016 — 2022</div>
+      <div class="timeline-content">
+        <h3>Researcher & Lecturer</h3>
+        <div class="org">Chalmers University of Technology, Gothenburg</div>
+        <p>Conducted doctoral research on innovation ecosystems in the autonomous vehicle industry, including a visiting research stint at Mines ParisTech (Feb–Mar 2020).</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-year">2016 — 2022</div>
+      <div class="timeline-content">
+        <h3>Research Collaborator</h3>
+        <div class="org">Volvo Car Group, Gothenburg</div>
+        <ul>
+          <li>Conducted a collaborative study on the development of an Autonomous Drive (AD) platform.</li>
+          <li>Developed a framework using layered modular architecture for AD vehicles.</li>
+          <li>Investigated the implementation of Scaled Agile Framework (SAFe) in AD platform development.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-year">2016</div>
+      <div class="timeline-content">
+        <h3>Data Analyst Intern</h3>
+        <div class="org">Volvo Buses AB, Gothenburg</div>
+        <ul>
+          <li>Conducted research and analysis to design Volvo bus fleet management system.</li>
+          <li>Visualized Volvo's fleet data using Microsoft Power BI.</li>
+          <li>Developed a theoretical model projecting the feasibility of electric buses for public transport.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-year">2012 — 2014</div>
+      <div class="timeline-content">
+        <h3>Electrical Engineer</h3>
+        <div class="org">Hyundai Engineering and Construction Ltd.</div>
+        <ul>
+          <li>Colombo, Sri Lanka — Waterfront integrated resort project: set up electric substations and conducted feasibility study for electrical power distribution.</li>
+          <li>Doha, Qatar — Heart of Doha Phase 1C: quality assurance & control for all electrical works and review of building services design.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-label">Research & Publications</div>
+  <div class="section-title">Selected Work</div>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <span class="project-tag">PhD Thesis</span>
+      <h3>Becoming a Keystone: How Incumbents Can Leverage Technological Change to Create Ecosystems</h3>
+      <p>Award-winning doctoral thesis exploring how established firms can position themselves as keystones in emerging innovation ecosystems, with insights from the autonomous vehicle industry.</p>
+      <a href="https://research.chalmers.se/en/publication/528786" target="_blank" class="project-link">View thesis →</a>
+    </div>
+
+    <div class="project-card">
+      <span class="project-tag">Published</span>
+      <h3>Joining Forces to Create Value: The Emergence of an Innovation Ecosystem</h3>
+      <p>Peer-reviewed article in Technovation (ABS Rank 3) with M. Elmquist examining how innovation ecosystems emerge through collaborative value creation.</p>
+      <a href="https://doi.org/10.1016/j.technovation.2021.102453" target="_blank" class="project-link">View article →</a>
+    </div>
+
+    <div class="project-card">
+      <span class="project-tag">Forthcoming</span>
+      <h3>Tactical Capabilities in Agile NPD Projects</h3>
+      <p>Insights from an autonomous car project in Sweden. Co-authored with L. Lindlöf and M. Rothoff. Forthcoming in Int. J. Business Innovation and Research (ABS Rank 1).</p>
+      <a href="https://doi.org/10.1504/IJBIR.2021.10042530" target="_blank" class="project-link">View paper →</a>
+    </div>
+
+    <div class="project-card">
+      <span class="project-tag">Working Paper</span>
+      <h3>Keystone Orchestration in an Emerging Ecosystem</h3>
+      <p>The case of autonomous drive technology development in Sweden. Co-authored with M. Elmquist. Under review at International Journal of Innovation Management (ABS Rank 2).</p>
+    </div>
+
+    <div class="project-card">
+      <span class="project-tag">Working Paper</span>
+      <h3>The Battle for Keystone Position</h3>
+      <p>Exploring the competitive dynamics in an emerging innovation ecosystem. Targeting Technological Forecasting and Social Change (ABS Rank 3).</p>
+    </div>
+
+    <div class="project-card">
+      <span class="project-tag">Licentiate Thesis</span>
+      <h3>The Emergence of Innovation Ecosystems</h3>
+      <p>Exploring the role of the keystone firm in emerging ecosystems. Chalmers University of Technology, 2019.</p>
+      <a href="https://research.chalmers.se/publication/512188/file/512188_Fulltext.pdf" target="_blank" class="project-link">View thesis →</a>
+    </div>
+
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-label">Contact</div>
+  <div class="section-title">Let's Connect</div>
+  <p>Open to research collaborations, speaking invitations, and academic inquiries. Based in Stockholm, Sweden.</p>
+  <div class="contact-links">
+    <a class="contact-link" href="mailto:gouthananp@gmail.com">
+      <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+      gouthananp@gmail.com
+    </a>
+    <a class="contact-link" href="https://research.chalmers.se/en/publication/528786" target="_blank">
+      <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 000 20M2 12h20"/></svg>
+      Chalmers Research
+    </a>
+    <a class="contact-link" href="tel:+46704156369">
+      <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      +46 70 415 6369
+    </a>
+  </div>
+</section>
+
+<footer>
+  © 2026 Goutha Pushpananthan · Stockholm, Sweden
+</footer>
+
+</body>
+</html>
